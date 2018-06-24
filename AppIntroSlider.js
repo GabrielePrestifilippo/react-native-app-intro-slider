@@ -147,6 +147,7 @@ export default class AppIntroSlider extends React.Component {
   }
 
   render() {
+  const {hidePagination} = this.props
     return (
       <View style={styles.flexOne}>
         <FlatList
@@ -157,12 +158,13 @@ export default class AppIntroSlider extends React.Component {
           showsHorizontalScrollIndicator={false}
           bounces={false}
           style={styles.flexOne}
+          onScroll={this._onMomentumScrollEnd}
           renderItem={this._renderItem}
           onMomentumScrollEnd={this._onMomentumScrollEnd}
           extraData={this.state.width}
           onLayout={this._onLayout}
         />
-        {this._renderPagination()}
+        {!hidePagination && this._renderPagination()}
       </View>
     );
   }
@@ -174,7 +176,7 @@ const styles = StyleSheet.create({
   },
   paginationContainer: {
     position: 'absolute',
-    bottom: 16 + (isIphoneX ? 34 : 0),
+    bottom: 0 + (isIphoneX ? 34 : 0),
     left: 0,
     right: 0,
   },
